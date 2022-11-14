@@ -6,7 +6,7 @@ local M = {}
 -- @param opts - Setup options
 -- @return nil
 M.setup = function(opts)
-    -- TODO
+    -- TODO Implement
     P(opts)
 end
 
@@ -24,14 +24,13 @@ local highlight = function()
 end
 
 
--- Main
+-- Run test cases
 -- @return nil
 M.run_tests = function()
     -- Setup Test Cases
     util.setup_tests()
 
     -- Get Results
-    -- TODO Implement
     local results, title = util.run_tests()
 
     -- Create Window
