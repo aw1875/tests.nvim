@@ -1,0 +1,43 @@
+================================================================================
+                                                                  *tests.nvim*
+
+Simple plugin for running my java test cases for CSCI 261
+
+                                                               *tests.setup()*
+tests.setup({opts})
+
+    Setup options for running test cases. >
+        tests.setup({
+            timeout = 5000,
+            ...
+        })
+<
+                                                           *tests.run_tests()*
+tests.run_tests()
+    
+    Run the test cases for the current working file. Tests run in the format
+    of question number -> testcases -> (input-q.1 .. input-q.n AND answer-q.1
+    .. answer-q.n). See an example tree:
+
+    2
+    ├── NumPaths.java
+    └── testcases
+        ├── answer-2.1
+        ├── answer-2.2
+        ├── answer-2.3
+        ├── answer-2.4
+        ├── answer-2.5
+        ├── answer-2.6
+        ├── answer-2.7
+        ├── input-2.1
+        ├── input-2.2
+        ├── input-2.3
+        ├── input-2.4
+        ├── input-2.5
+        ├── input-2.6
+        └── input-2.7
+    
+    With this format we can easily track questions and their respective test
+    cases. 
+
+ vim:tw=78:ts=8:ft=help:norl:
