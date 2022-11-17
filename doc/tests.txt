@@ -6,10 +6,10 @@ Simple plugin for running my java test cases for CSCI 261
                                                                *tests.setup()*
 tests.setup({opts})
 
-    Setup options for running test cases. >
+    Setup options for running test cases. Currently, you can only modify the
+    testcase timeout length. >
         tests.setup({
-            timeout = 5000,
-            ...
+            timeout = 2000
         })
 <
                                                            *tests.run_tests()*

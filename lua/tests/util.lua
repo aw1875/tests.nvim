@@ -65,7 +65,7 @@ local run_test = function(case)
         vim.list_extend(vim.fn.readfile(util._folder .. "/testcases/input-" .. util._problem .. "." .. case), { "" }))
 
     -- Wait till `timeout`
-    local len = vim.fn.jobwait({ job_id }, 5000)
+    local len = vim.fn.jobwait({ job_id }, util._timeout or 3000)
     if len[1] == -1 then
         vim.fn.jobstop(job_id)
     end

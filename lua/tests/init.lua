@@ -6,8 +6,7 @@ local M = {}
 -- @param opts - Setup options
 -- @return nil
 M.setup = function(opts)
-    -- TODO Implement
-    P(opts)
+    util._timeout = opts.timeout
 end
 
 -- Highlight Results
