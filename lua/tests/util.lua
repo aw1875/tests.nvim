@@ -11,9 +11,8 @@ local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 -- @param case - Current Test Case
 -- @param folder - Current Working Folder
 -- @return case and success
-local run_test = function(case, folder)
-
-    local output = vim.fn.readfile("./testcases/answer-" .. folder .. "." .. case)
+local run_test = function(case)
+    local output = vim.fn.readfile(util._folder .. "/testcases/answer-" .. util._problem .. "." .. case)
     local expected, outcome, errors = {}, {}, {}
     local success = false
 
@@ -62,7 +61,8 @@ local run_test = function(case, folder)
         data_buffered = true,
     })
 
-    vim.fn.chansend(job_id, vim.list_extend(vim.fn.readfile("./testcases/input-" .. util._folder .. "." .. case), { "" }))
+    vim.fn.chansend(job_id,
+        vim.list_extend(vim.fn.readfile(util._folder .. "/testcases/input-" .. util._problem .. "." .. case), { "" }))
 
     -- Wait till `timeout`
     local len = vim.fn.jobwait({ job_id }, 5000)
@@ -97,8 +97,9 @@ end
 -- Setup Test Cases
 -- @return nil
 util.setup_tests = function()
-    util._current_file = vim.fn.expand("%:t")
-    util._folder = string.match(vim.fn.getcwd(), "(%d+)/?$")
+    util._current_file = vim.api.nvim_buf_get_name(0):gsub("%s+", "\\ "):gsub("#", "\\#")
+    util._folder = vim.fn.expand("%:p:h")
+    util._problem = util._folder:match("(%d+)/?$")
 end
 
 -- Iterate and run test cases
@@ -108,11 +109,11 @@ util.run_tests = function()
     local passed_cases, total_cases = 0, 0
     local title = "TestCases"
 
-    for i, _ in ipairs(plenary.scandir.scan_dir('./testcases', {
+    for i, _ in ipairs(plenary.scandir.scan_dir(util._folder .. '/testcases', {
         search_pattern = "input-",
         depth = 1,
     })) do
-        local case, success = run_test(i, util._folder)
+        local case, success = run_test(i)
 
         if success then
             passed_cases = passed_cases + 1
